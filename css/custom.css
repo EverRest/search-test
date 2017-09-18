@@ -1,0 +1,26 @@
+header, main, footer {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+header {
+    margin: 25px 0;
+}
+
+main {
+    margin-bottom: 50px;
+}
+
+footer {
+    color: #c4c4c4;
+}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+
+.gm-style img[src^='https://maps.gstatic.com/mapfiles/api-3/images/google4.png'],
+.gm-style img[src^='https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png']{
+    display: none;
+}
