@@ -1,22 +1,22 @@
 (function () {
-// $(document).ready(function () {
     // define config obj
     var config = {
             'renderPath': 'main' // element where you want to render component
         },
         map = {};
 
+    // api auth
+    initAuth();
+
     // render search form and map
     render(config.renderPath);
 
     // init map
-    // setTimeout( function () {
-        initMap();
-    // }, 100);
+    initMap();
 
+    // get info from api by code
     search();
 
-// });
 })();
 
 /**
@@ -57,23 +57,23 @@ function search() {
             code = code.toUpperCase();
 
             // ajax request
+
             $.ajax({
+                url: 'https://apidev.rocketroute.com/notam/v1/service.wsdl',
                 crossOrigin: true,
-                url: 'https://fly.rocketroute.com/remote/auth',
                 data:
                     {
-                        'req':
-                        '<?xml version="1.0" encoding="UTF-8" ?>' +
-                                '<AUTH><USR>medynskyypavlo@gmail.com</USR>' +
-                                '<PASSWD>3fhHkWBkbrkJ8Pk3NZDr</PASSWD>' +
-                                '<DEVICEID>1299f2aa8935b9ffabcd4a2cbcd16b8d45691629</DEVICEID>' +
-                                '<PCATEGORY>RocketRoute</PCATEGORY>' +
-                                '<APPMD5>akUXPx57q6yXzrMM9f24</APPMD5>' +
-                                '</AUTH>',
+                        'req':  '<?xml version="1.0" encoding="UTF-8"?>' +
+                                '<REQWX>' +
+                                '<USR>medynskyypavlo@gmail.com</USR>' +
+                                '<PASSWD>89954141c89f2a74fbcc2d1a3478f5f6</PASSWD>' +
+                                '<ICAO>' + code +'</ICAO>' +
+                                '</REQWX>',
                     },
                 type: 'POST',
-                dataType: 'text/plain',
-                contentType: 'text/plain',
+                // contentType: 'application/x-www-form-urlencoded',
+                // dataType: 'text/plain; charset=utf-8',
+                // dataType: 'text/html',
                 success : function (xml) {
                     console.log(xml);
                 },
@@ -82,7 +82,6 @@ function search() {
                     console.log(thrownError);
                 }
             });
-
 
         } else {
             $('#search-form').append('<h3 class="error-message"><strong>Code is not valid!!!</strong></h3>');
@@ -201,4 +200,39 @@ function initMap() {
             });
         }
     }, 100);
+}
+
+/**
+ * get auth token rocketroute API
+ * return false
+ */
+function initAuth() {
+    console.log('initAuth');
+    $.ajax({
+        crossOrigin: true,
+        url: 'https://flydev.rocketroute.com/remote/auth',
+        data:
+            {
+                'req':  '<?xml version="1.0" encoding="UTF-8" ?>' +
+                '<AUTH><USR>medynskyypavlo@gmail.com</USR>' +
+                '<PASSWD>3fhHkWBkbrkJ8Pk3NZDr</PASSWD>' +
+                '<DEVICEID>e138231a68ad82f054e3d756c6634ba1</DEVICEID>' +
+                '<PCATEGORY>RocketRoute</PCATEGORY>' +
+                '<APPMD5>akUXPx57q6yXzrMM9f24</APPMD5>' +
+                '</AUTH>',
+            },
+        type: 'POST',
+        contentType: 'text/plain',
+        // contentType: 'application/x-www-form-urlencoded',
+        dataType: "text/plain; charset=utf-8",
+        cache: false,
+        // contentType: 'application/javascript',
+        success : function (xml) {
+            console.log(xml);
+        },
+        error : function (xhr, ajaxOptions, thrownError){
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
 }
