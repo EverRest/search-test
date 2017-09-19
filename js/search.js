@@ -58,25 +58,22 @@ function search() {
 
             // ajax request
             $.ajax({
-                headers: {
-                    "Access-Control-Allow-Origin: ": "*",
-                    "Access-Control-Allow-Methods: ": "POST",
-                    "Access-Control-Allow-Headers: ": "Authorization"
-                },
+                crossOrigin: true,
                 url: 'https://fly.rocketroute.com/remote/auth',
-                data: {
-                        'req': '<?xml version="1.0" encoding="UTF-8" ?>' +
+                data:
+                    {
+                        'req':
+                        '<?xml version="1.0" encoding="UTF-8" ?>' +
                                 '<AUTH><USR>medynskyypavlo@gmail.com</USR>' +
                                 '<PASSWD>3fhHkWBkbrkJ8Pk3NZDr</PASSWD>' +
                                 '<DEVICEID>1299f2aa8935b9ffabcd4a2cbcd16b8d45691629</DEVICEID>' +
                                 '<PCATEGORY>RocketRoute</PCATEGORY>' +
                                 '<APPMD5>akUXPx57q6yXzrMM9f24</APPMD5>' +
-                                '</AUTH>'
+                                '</AUTH>',
                     },
                 type: 'POST',
-                crossDomain: true,
-                contentType: 'utf-8',
-                dataType: 'text',
+                dataType: 'text/plain',
+                contentType: 'text/plain',
                 success : function (xml) {
                     console.log(xml);
                 },
@@ -85,6 +82,8 @@ function search() {
                     console.log(thrownError);
                 }
             });
+
+
         } else {
             $('#search-form').append('<h3 class="error-message"><strong>Code is not valid!!!</strong></h3>');
             $('.error-message').css({'color':'red'});
@@ -115,7 +114,6 @@ function validation(str) {
 function initMap() {
     setTimeout( function () {
         var el = $('#map');
-        console.log(el);
         if (el.length !== 0) {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: -34.397, lng: 150.644},
