@@ -14,7 +14,7 @@ For this task you need to:
 1) Read our API documentation at www.rocketroute.com/developers
 Note that we provide a sandbox where you can test the API input/output
 
-2) You will need password and MD5 Key which for you are 3fhHkWBkbrkJ8Pk3NZDr and akUXPx57q6yXzrMM9f24 accordingly. For login name please use your email medynskyypavlo@gmail.com.
+2) You will need password and MD5 Key. For login name please use your email 
 
 The task is:
 
