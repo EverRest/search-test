@@ -23,7 +23,7 @@ class Index extends Controller
      * Ajax auth user
      * return json
      */
-    public function auth()
+    private function auth()
     {
         $this->cmodel->getToken();
     }
@@ -37,6 +37,7 @@ class Index extends Controller
         $post = XSS::clean($_POST);
         $errors = Validator::searchForm($post);
 
+        // check for errors
         if ($errors['count'] === 0) {
             $this->cmodel->getInfo($post['code']);
         } else {

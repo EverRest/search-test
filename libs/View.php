@@ -14,11 +14,19 @@ class View {
      * assign variable data to view
      * @param bool $data
      */
-    public function assign($data = false) {
+    public function assign($data = false)
+    {
 
         self::$data = $data;
     }
-    public function render($name, $noInclude = false) {
+
+    /**
+     * render view
+     * @param $name
+     * @param bool $noInclude
+     */
+    public function render($name, $noInclude = false)
+    {
 
         if($noInclude == true) {
             require 'views/'.$name.'.php';
