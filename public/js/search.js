@@ -7,7 +7,7 @@
         markers = [];
 
     // api auth
-    // initAuth();
+    initAuth();
 
     // render search form and map
     render(config.renderPath);
@@ -220,6 +220,7 @@
                 var xmlDoc = $.parseXML( res ),
                     xml = $( xmlDoc ),
                     result = xml.find( "RESULT" );
+                console.log(result);
 
                 // check response for errors
                 if ( result.text().toLowerCase() == 'error') {
@@ -245,21 +246,20 @@
 
         var coordinates = {},
             tmp = '';
+
             coordinates = formatCoordinates(item.q);
             coordinates.message = item.e;
             tmp = dgrs2num(coordinates);
             coordinates.lat = tmp.lat;
             coordinates.lng = tmp.lng;
-        console.log(coordinates);
 
         var marker = new google.maps.Marker({
-            position: {lat: coordinates.lat, lng: coordinates.lng},
-            // position: dgrs2num(coordinates),
+            position: {lat: coordinates.lng, lng: coordinates.lat},
             icon: 'http://www.clker.com/cliparts/H/Z/0/R/f/S/warning-icon-th.png',
             map: map
         });
 
-        map.setCenter(new google.maps.LatLng(coordinates.lat, coordinates.lng));
+        map.setCenter(new google.maps.LatLng(coordinates.lng, coordinates.lat));
         map.setZoom(12);
         markers.push(marker);
 

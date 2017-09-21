@@ -29,6 +29,8 @@ class Credential_Model extends Model
      */
     public function getToken()
     {
+        if ($_COOKIE['_token']) return '';
+
         $xml =  '<?xml version="1.0" encoding="UTF-8" ?>' .
             '<AUTH><USR>' . $this->email .'</USR>' .
             '<PASSWD>' . $this->password . '</PASSWD>' .
