@@ -220,7 +220,6 @@
                 var xmlDoc = $.parseXML( res ),
                     xml = $( xmlDoc ),
                     result = xml.find( "RESULT" );
-                console.log(result);
 
                 // check response for errors
                 if ( result.text().toLowerCase() == 'error') {
